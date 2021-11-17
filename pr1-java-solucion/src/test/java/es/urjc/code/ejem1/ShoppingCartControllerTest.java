@@ -2,7 +2,6 @@ package es.urjc.code.ejem1;
 
 import static org.mockito.Mockito.mock;
 
-import java.util.Random;
 import java.util.UUID;
 
 import static org.mockito.Mockito.verify;

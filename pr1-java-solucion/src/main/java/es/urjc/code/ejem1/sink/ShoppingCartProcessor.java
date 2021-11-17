@@ -1,9 +1,5 @@
 package es.urjc.code.ejem1.sink;
 
-
-
-import java.util.Collections;
-
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
