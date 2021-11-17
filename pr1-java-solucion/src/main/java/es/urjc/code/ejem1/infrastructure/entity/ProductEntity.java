@@ -11,7 +11,6 @@ import javax.persistence.Id;
 public class ProductEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private UUID id;
 	
 	private String name;
