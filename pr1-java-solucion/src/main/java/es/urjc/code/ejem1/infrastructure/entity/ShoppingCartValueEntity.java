@@ -19,7 +19,7 @@ public class ShoppingCartValueEntity {
 
 	public ShoppingCartValueEntity() {
 		super();
-		this.value = new Double(0);
+		this.value = Double.valueOf(0);
 	}
 
 	public ShoppingCartValueEntity(UUID cartId, Double value) {
