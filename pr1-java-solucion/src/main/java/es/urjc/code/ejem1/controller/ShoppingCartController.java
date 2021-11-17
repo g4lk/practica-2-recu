@@ -49,7 +49,7 @@ public class ShoppingCartController {
 	}
 
 	@PostMapping("/{idShoppingCart}/product/{idProduct}/quantity/{quantity}")
-	public BodyBuilder addProductToShoppingCart(
+	public ResponseEntity<UUID> addProductToShoppingCart(
 	        @PathVariable UUID idShoppingCart,
 	        @PathVariable UUID idProduct,
 	        @PathVariable int quantity) {
@@ -59,7 +59,7 @@ public class ShoppingCartController {
 
 	    applicationEventPublisher.publishEvent(event);
 	    
-		return ResponseEntity.ok();
+		return ResponseEntity.ok(event.getCartId());
 	}
 
 	@DeleteMapping("/{idShoppingCart}/product/{idProduct}")

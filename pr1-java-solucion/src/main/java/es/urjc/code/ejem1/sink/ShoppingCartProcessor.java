@@ -1,5 +1,8 @@
 package es.urjc.code.ejem1.sink;
 
+import java.util.Collections;
+import java.util.UUID;
+
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +43,7 @@ public class ShoppingCartProcessor {
 		// this processor would use the domain classes to do this logic.
 		ShoppingCartEntity shoppingCartEntity = shoppingCartRepository.findById(event.getCartId()).get();
 		ProductEntity productEntity = productRepository.findById(event.getProductId()).get();
-		ShoppingCartItemEntity itemEntity = new ShoppingCartItemEntity(null, productEntity, event.getQuantity());
+		ShoppingCartItemEntity itemEntity = new ShoppingCartItemEntity(UUID.randomUUID(), productEntity, event.getQuantity());
 		shoppingCartEntity.getItems().removeIf((item)->item.getProduct().getId() == productEntity.getId());
 		shoppingCartEntity.getItems().add(itemEntity);
 		shoppingCartRepository.save(shoppingCartEntity);		
@@ -52,12 +55,11 @@ public class ShoppingCartProcessor {
 	
 	@EventListener
 	public void handleShoppingCartCreatedEvent(ShoppingCartCreatedEvent event) {
-		ShoppingCartEntity shoppingCartEntity = new ShoppingCartEntity();
+		ShoppingCartEntity shoppingCartEntity = new ShoppingCartEntity(event.getId(),Collections.emptyList());
 		shoppingCartRepository.save(shoppingCartEntity);
 		
-		ShoppingCartValueEntity shoppingCartValueEntity = new ShoppingCartValueEntity();
+		ShoppingCartValueEntity shoppingCartValueEntity = new ShoppingCartValueEntity(event.getId(),Double.valueOf(0));
 		valueRepository.save(shoppingCartValueEntity);
-		System.out.println("aa");
 	}
 	
 	@EventListener
