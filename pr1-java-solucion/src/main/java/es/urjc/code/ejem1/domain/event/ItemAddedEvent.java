@@ -1,22 +1,24 @@
 package es.urjc.code.ejem1.domain.event;
 
+import java.util.UUID;
+
 public class ItemAddedEvent {
 
-    	private final Long cartId;
-	private final Long productId;
+    	private final UUID cartId;
+	private final UUID productId;
 	private final int quantity;
 
-	public ItemAddedEvent(Long cartId, Long productId, int quantity) {
+	public ItemAddedEvent(UUID cartId, UUID productId, int quantity) {
 		this.cartId = cartId;
 		this.productId = productId;
 		this.quantity = quantity;
 	}
 
-	public Long getCartId() {
+	public UUID getCartId() {
 		return cartId;
 	}
 	
-	public Long getProductId() {
+	public UUID getProductId() {
 		return productId;
 	}
 	

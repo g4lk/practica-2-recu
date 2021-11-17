@@ -1,15 +1,17 @@
 package es.urjc.code.ejem1.domain.event;
 
+import java.util.UUID;
+
 public class ProductDeletedEvent {
 
-	private Long id;
+	private UUID id;
 
 	public ProductDeletedEvent() {}
-	public ProductDeletedEvent(Long id) {
+	public ProductDeletedEvent(UUID id) {
 		this.id = id;
 	}
 	
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 		

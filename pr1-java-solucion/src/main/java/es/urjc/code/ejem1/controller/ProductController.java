@@ -5,6 +5,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
@@ -42,7 +43,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
-	public ProductResponseDTO getProduct(@PathVariable Long id) {
+	public ProductResponseDTO getProduct(@PathVariable UUID id) {
 		return mapper.map(productService.getProduct(id), ProductResponseDTO.class);
 	}
 
@@ -61,7 +62,7 @@ public class ProductController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ProductResponseDTO deleteProduct(@PathVariable Long id) {
+	public ProductResponseDTO deleteProduct(@PathVariable UUID id) {
 	    	applicationEventPublisher.publishEvent(productService.deleteProduct(id));
 		
 		return new ProductResponseDTO(id);

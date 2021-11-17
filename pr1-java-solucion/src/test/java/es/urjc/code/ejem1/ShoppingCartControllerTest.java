@@ -3,6 +3,7 @@ package es.urjc.code.ejem1;
 import static org.mockito.Mockito.mock;
 
 import java.util.Random;
+import java.util.UUID;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,8 +31,8 @@ public class ShoppingCartControllerTest {
 
    @Test
    public void productCanBeAddedToShoppingCart() {
-       Long idShoppingCart = new Random().nextLong();
-       Long idProduct = new Random().nextLong();
+       UUID idShoppingCart = UUID.randomUUID();
+       UUID idProduct = UUID.randomUUID();
        int quantity = 3;
        ItemAddedEvent itemAddedEvent = new ItemAddedEvent(idShoppingCart, idProduct, quantity);
         when(shoppingService.addProduct(idShoppingCart, idProduct, quantity)). thenReturn(itemAddedEvent);

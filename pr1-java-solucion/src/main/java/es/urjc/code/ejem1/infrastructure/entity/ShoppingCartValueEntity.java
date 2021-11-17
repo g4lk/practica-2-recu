@@ -1,6 +1,8 @@
 package es.urjc.code.ejem1.infrastructure.entity;
 
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,7 @@ public class ShoppingCartValueEntity {
 
     	@Id
     	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cartId;
+	private UUID cartId;
 
 	private Double value;
 
@@ -20,17 +22,17 @@ public class ShoppingCartValueEntity {
 		this.value = new Double(0);
 	}
 
-	public ShoppingCartValueEntity(Long cartId, Double value) {
+	public ShoppingCartValueEntity(UUID cartId, Double value) {
 		super();
 		this.cartId = cartId;
 		this.value = value;
 	}
 
-	public Long getCartId() {
+	public UUID getCartId() {
 		return this.cartId;
 	}
 
-	public void setCartId(Long cartId) {
+	public void setCartId(UUID cartId) {
 		this.cartId = cartId;
 	}
 

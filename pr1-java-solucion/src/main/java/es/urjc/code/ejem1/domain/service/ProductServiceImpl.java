@@ -2,6 +2,7 @@ package es.urjc.code.ejem1.domain.service;
 
 import java.util.Collection;
 import java.util.Random;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 
@@ -27,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public FullProductDTO getProduct(Long id) {
+	public FullProductDTO getProduct(UUID id) {
 		return repository.findById(id);
 	}
 
@@ -36,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 		// We transform dtos into domain objects
 		Product product = mapper.map(productDTO, Product.class);
 		// Single logic inside domain
-		product.setId(new Random().nextLong());
+		product.setId(UUID.randomUUID());
 		
 		// We produce the event that is returned to caller
 		ProductCreatedEvent event = new ProductCreatedEvent(product.getId(), product.getName(), product.getDescription(), product.getPrice());		
@@ -45,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductDeletedEvent deleteProduct(Long id) {
+	public ProductDeletedEvent deleteProduct(UUID id) {
 	    return new ProductDeletedEvent(id);
 	}
 

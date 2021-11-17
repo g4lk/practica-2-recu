@@ -3,6 +3,7 @@ package es.urjc.code.ejem1.controller;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import java.net.URI;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
@@ -43,14 +44,14 @@ public class ShoppingCartController {
 	}
 
 	@GetMapping("/{id}")
-	public ShoppingCartResponseDTO getShoppingCart(@PathVariable Long id) {
+	public ShoppingCartResponseDTO getShoppingCart(@PathVariable UUID id) {
 		return mapper.map(shoppingService.getShoppingCart(id), ShoppingCartResponseDTO.class);
 	}
 
 	@PostMapping("/{idShoppingCart}/product/{idProduct}/quantity/{quantity}")
 	public BodyBuilder addProductToShoppingCart(
-	        @PathVariable Long idShoppingCart,
-	        @PathVariable Long idProduct,
+	        @PathVariable UUID idShoppingCart,
+	        @PathVariable UUID idProduct,
 	        @PathVariable int quantity) {
 
 	    
@@ -63,8 +64,8 @@ public class ShoppingCartController {
 
 	@DeleteMapping("/{idShoppingCart}/product/{idProduct}")
 	public ShoppingCartResponseDTO deleteProductInShoppingCart(
-	        @PathVariable Long idShoppingCart,
-	        @PathVariable Long idProduct) {
+	        @PathVariable UUID idShoppingCart,
+	        @PathVariable UUID idProduct) {
 	    	ItemRemovedEvent event = shoppingService.deleteProduct(idShoppingCart, idProduct);
 		applicationEventPublisher.publishEvent(event);
 		return mapper.map(event, ShoppingCartResponseDTO.class);
@@ -85,7 +86,7 @@ public class ShoppingCartController {
 
 	@PatchMapping("/{id}")
 	public ShoppingCartResponseDTO updateShoppingCart(
-	        @PathVariable Long id,
+	        @PathVariable UUID id,
 	        @Validated @RequestBody ShoppingCartRequestDTO shoppingCartRequestDTO) {
 	    	ShoppingCartClosedEvent event = shoppingService.updateShoppingCart(id,
 		        mapper.map(shoppingCartRequestDTO, ShoppingCartDTO.class));
@@ -95,7 +96,7 @@ public class ShoppingCartController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ShoppingCartResponseDTO deleteShoppingCart(@PathVariable Long id) {
+	public ShoppingCartResponseDTO deleteShoppingCart(@PathVariable UUID id) {
 	    ShoppingCartDeletedEvent event = shoppingService.deleteShoppingCart(id); 
 		applicationEventPublisher.publishEvent(event);
 		

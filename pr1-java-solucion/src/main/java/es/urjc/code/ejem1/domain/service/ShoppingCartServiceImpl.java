@@ -1,6 +1,7 @@
 package es.urjc.code.ejem1.domain.service;
 
 import java.util.Random;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 
@@ -36,20 +37,20 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		this.validationService = validationService;
 	}
 	@Override
-	public FullShoppingCartDTO getShoppingCart(Long id) {
+	public FullShoppingCartDTO getShoppingCart(UUID id) {
 		return mapper.map(shoppingCartRepository.findById(id), FullShoppingCartDTO.class);
 	}
 
 	@Override
 	public ShoppingCartCreatedEvent createShoppingCart() {
 	    	ShoppingCart shoppingCart = new ShoppingCart();
-	    	shoppingCart.setId(new Random().nextLong());
+	    	shoppingCart.setId(UUID.randomUUID());
 		
 		return new ShoppingCartCreatedEvent(shoppingCart.getId());
 	}
 
 	@Override
-	public ShoppingCartClosedEvent updateShoppingCart(Long id, ShoppingCartDTO shoppingCartDTO) {
+	public ShoppingCartClosedEvent updateShoppingCart(UUID id, ShoppingCartDTO shoppingCartDTO) {
 	    	FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(id);
 
 		ShoppingCart shoppingCart = mapper.map(fullShoppingCartDTO, ShoppingCart.class);
@@ -62,12 +63,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public ShoppingCartDeletedEvent deleteShoppingCart(Long id) {
+	public ShoppingCartDeletedEvent deleteShoppingCart(UUID id) {
 	    return new ShoppingCartDeletedEvent(id);
 	}
 
 	@Override
-	public ItemAddedEvent addProduct(Long idShoppingCart, Long idProduct, int quantity) {
+	public ItemAddedEvent addProduct(UUID idShoppingCart, UUID idProduct, int quantity) {
 	
 	    	FullProductDTO fullProductDTO = productRepository.findById(idProduct);
 		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(idShoppingCart);
@@ -88,7 +89,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public ItemRemovedEvent deleteProduct(Long idShoppingCart, Long idProduct) {
+	public ItemRemovedEvent deleteProduct(UUID idShoppingCart, UUID idProduct) {
 	    	FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(idShoppingCart);
 
 		ShoppingCart shoppingCart = mapper.map(fullShoppingCartDTO, ShoppingCart.class);

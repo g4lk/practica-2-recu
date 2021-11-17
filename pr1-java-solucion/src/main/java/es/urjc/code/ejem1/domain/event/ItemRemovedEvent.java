@@ -1,22 +1,22 @@
 package es.urjc.code.ejem1.domain.event;
 
-
+import java.util.UUID;
 
 public class ItemRemovedEvent {
 
-	private Long idShoppingCart;
-	private Long idProduct;
+	private UUID idShoppingCart;
+	private UUID idProduct;
 
-	public ItemRemovedEvent(Long idShoppingCart, Long idProduct) {
+	public ItemRemovedEvent(UUID idShoppingCart, UUID idProduct) {
 		this.idShoppingCart = idShoppingCart;
 		this.idProduct = idProduct;
 	}
 	
-	public Long getIdShoppingCart() {
+	public UUID getIdShoppingCart() {
 		return idShoppingCart;
 	}
 	
-	public Long getIdProduct() {
+	public UUID getIdProduct() {
 		return idProduct;
 	}
 

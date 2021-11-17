@@ -1,6 +1,7 @@
 package es.urjc.code.ejem1.infrastructure.entity;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ public class ShoppingCartEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private UUID id;
 	private ShoppingCartStatus status;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -26,17 +27,17 @@ public class ShoppingCartEntity {
 		super();
 	}
 
-	public ShoppingCartEntity(Long id, List<ShoppingCartItemEntity> items) {
+	public ShoppingCartEntity(UUID id, List<ShoppingCartItemEntity> items) {
 		super();
 		this.id = id;
 		this.items = items;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

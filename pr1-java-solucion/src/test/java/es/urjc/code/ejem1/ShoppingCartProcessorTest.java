@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.any;
 
 
 import java.util.Random;
+import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -46,7 +47,7 @@ public class ShoppingCartProcessorTest {
 	@Test
 	@Order(1)
 	void shoppingCartCanBeAdded() {
-	    	ShoppingCartCreatedEvent shoppingCartCreatedEvent = new ShoppingCartCreatedEvent(new Random().nextLong());
+	    	ShoppingCartCreatedEvent shoppingCartCreatedEvent = new ShoppingCartCreatedEvent(UUID.randomUUID());
 	    	shoppingCartProcessor.handleShoppingCartCreatedEvent(shoppingCartCreatedEvent);
 		verify(shoppingCartRepository).save(any(ShoppingCartEntity.class));
 		verify(valueRepository).save(any(ShoppingCartValueEntity.class));

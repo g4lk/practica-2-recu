@@ -1,15 +1,16 @@
 package es.urjc.code.ejem1.domain.event;
 
+import java.util.UUID;
 
 public class ShoppingCartClosedEvent {
 
-	private final Long id;
+	private final UUID id;
 
-	public ShoppingCartClosedEvent(Long id) {
+	public ShoppingCartClosedEvent(UUID id) {
 		this.id = id;
 	}
 	
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 }

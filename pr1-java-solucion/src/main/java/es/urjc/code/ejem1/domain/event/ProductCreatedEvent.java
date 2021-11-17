@@ -1,9 +1,10 @@
 package es.urjc.code.ejem1.domain.event;
 
+import java.util.UUID;
 
 public class ProductCreatedEvent {
 
-	private Long id;
+	private UUID id;
 	private String name;
 	private String description;
 	private double price;
@@ -12,14 +13,14 @@ public class ProductCreatedEvent {
 	    super();
 	}
 	
-	public ProductCreatedEvent(Long id, String name, String description, double price) {
+	public ProductCreatedEvent(UUID id, String name, String description, double price) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
